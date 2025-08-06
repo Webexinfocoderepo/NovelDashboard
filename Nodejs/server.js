@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.send('Server running');
 });
 
-mongoose.connect('mongodb://localhost:27017/urlTracker', {
+mongoose.connect('mongodb+srv://akshay:akshayAi@cluster0.x0klfly.mongodb.net/Novel?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log("MongoDB connected"))
