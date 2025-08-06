@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5050';
+const API_BASE_URL = 'http://13.235.83.129/api';
 
 // API service for visitor tracking
 export const apiService = {
