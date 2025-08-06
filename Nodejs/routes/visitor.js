@@ -27,6 +27,11 @@ router.get('/track', async (req, res) => {
 router.get('/visitors', async (req, res) => {
     try {
       const allVisitors = await Visitor.find().sort({ createdAt: -1 });
+       if (!allVisitors || allVisitors.length === 0) {
+      return res.json([]);
+    }
+
+    // res.json(allVisitors);
       res.json(allVisitors);
     } catch (err) {
       res.status(500).json({ error: 'Failed to fetch visitors' });
