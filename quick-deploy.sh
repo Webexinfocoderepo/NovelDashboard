@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "🔧 Deploying Fix for /api/track URLs..."
+echo "🚀 Quick Deploy - Fixing Redirect URLs..."
 
-# Step 1: Update nginx configuration
+# Update nginx configuration
 echo "📝 Updating nginx configuration..."
-cat > /tmp/noveldashboard-updated.conf << 'EOF'
+cat > /tmp/noveldashboard-final.conf << 'EOF'
 server {
     listen 80;
     server_name 13.235.83.129;
@@ -42,7 +42,7 @@ server {
 }
 EOF
 
-sudo cp /tmp/noveldashboard-updated.conf /etc/nginx/sites-available/noveldashboard
+sudo cp /tmp/noveldashboard-final.conf /etc/nginx/sites-available/noveldashboard
 sudo ln -sf /etc/nginx/sites-available/noveldashboard /etc/nginx/sites-enabled/default
 
 echo "🧪 Testing nginx configuration..."
@@ -58,7 +58,7 @@ else
     exit 1
 fi
 
-# Step 2: Restart Node.js server to apply code changes
+# Restart Node.js server to apply code changes
 echo "🔄 Restarting Node.js server..."
 pm2 restart noveldashboard-api
 
@@ -68,4 +68,9 @@ echo "Complete: http://13.235.83.129/api/track?pid=111&uid=111&action=Complete"
 echo "Terminate: http://13.235.83.129/api/track?pid=111&uid=111&action=Terminate"
 echo "Quotafull: http://13.235.83.129/api/track?pid=111&uid=111&action=Quotafull"
 echo ""
-echo "✅ Fix deployed! Test the URLs above." 
+echo "📄 Direct page URLs:"
+echo "Complete: http://13.235.83.129/api/complete"
+echo "Terminate: http://13.235.83.129/api/terminate"
+echo "Quotafull: http://13.235.83.129/api/quotafull"
+echo ""
+echo "✅ Fix deployed! Now tracking URLs will redirect to /api/ pages." 

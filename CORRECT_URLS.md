@@ -10,16 +10,16 @@ Your tracking system works with `/api/track` URLs:
 - **Quotafull:** `http://13.235.83.129/api/track?pid=111&uid=111&action=Quotafull`
 
 ### 📄 Direct Page URLs:
-- **Complete Page:** `http://13.235.83.129/complete`
-- **Terminate Page:** `http://13.235.83.129/terminate`
-- **Quotafull Page:** `http://13.235.83.129/quotafull`
-- **Test Page:** `http://13.235.83.129/test-tracking`
+- **Complete Page:** `http://13.235.83.129/api/complete`
+- **Terminate Page:** `http://13.235.83.129/api/terminate`
+- **Quotafull Page:** `http://13.235.83.129/api/quotafull`
+- **Test Page:** `http://13.235.83.129/api/test-tracking`
 
 ## 🔄 How It Works
 
 1. **User clicks:** `http://13.235.83.129/api/track?pid=111&uid=111&action=Complete`
 2. **Node.js backend:** Saves data to MongoDB
-3. **Redirects to:** `http://13.235.83.129/complete`
+3. **Redirects to:** `http://13.235.83.129/api/complete`
 4. **Shows:** Complete page with "Insights Elite" branding
 
 ## 🚀 Quick Deployment

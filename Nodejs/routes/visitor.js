@@ -25,16 +25,16 @@ router.get('/track', async (req, res) => {
     // Redirect based on action
     switch(action) {
         case 'Complete':
-            res.redirect('http://13.235.83.129/complete');
+            res.redirect('http://13.235.83.129/api/complete');
             break;
         case 'Terminate':
-            res.redirect('http://13.235.83.129/terminate');
+            res.redirect('http://13.235.83.129/api/terminate');
             break;
         case 'Quotafull':
-            res.redirect('http://13.235.83.129/quotafull');
+            res.redirect('http://13.235.83.129/api/quotafull');
             break;
         default:
-            res.redirect('http://13.235.83.129/terminate'); // Default to terminate page
+            res.redirect('http://13.235.83.129/api/terminate'); // Default to terminate page
     }
   } catch (err) {
     res.status(500).send("Something went wrong.");
