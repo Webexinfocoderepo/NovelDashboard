@@ -16,19 +16,19 @@ app.get('/', (req, res) => {
 });
 
 // Serve the HTML pages
-app.get('/complete', (req, res) => {
+app.get('/api/complete', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/complete.html'));
 });
 
-app.get('/terminate', (req, res) => {
+app.get('/api/terminate', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/terminate.html'));
 });
 
-app.get('/quotafull', (req, res) => {
+app.get('/api/quotafull', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/quotafull.html'));
 });
 
-app.get('/test-tracking', (req, res) => {
+app.get('/api/test-tracking', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/test-tracking.html'));
 });
 
