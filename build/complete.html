@@ -34,30 +34,43 @@
             margin-bottom: 30px;
         }
         
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background-color: #007bff;
-            border-radius: 8px;
-            margin: 0 auto 10px;
+        .logo-graphic {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
         }
         
+        .shape {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            transform: rotate(45deg);
+            border-radius: 4px;
+        }
+        
+        .shape-1 { background-color: #8B5CF6; transform: rotate(45deg) translate(0, -20px); }
+        .shape-2 { background-color: #60A5FA; transform: rotate(45deg) translate(15px, -10px); }
+        .shape-3 { background-color: #F59E0B; transform: rotate(45deg) translate(20px, 0px); }
+        .shape-4 { background-color: #EC4899; transform: rotate(45deg) translate(10px, 15px); }
+        .shape-5 { background-color: #10B981; transform: rotate(45deg) translate(-10px, 10px); }
+        .shape-6 { background-color: #EF4444; transform: rotate(45deg) translate(-20px, 0px); }
+        
         .logo-text {
-            color: #007bff;
-            font-size: 24px;
+            color: #60A5FA;
+            font-size: 28px;
             font-weight: bold;
             margin-bottom: 5px;
+            letter-spacing: 1px;
         }
         
         .logo-subtext {
-            color: #007bff;
-            font-size: 16px;
+            color: #EF4444;
+            font-size: 18px;
+            font-weight: 600;
         }
         
         .title {
@@ -83,9 +96,16 @@
 <body>
     <div class="container">
         <div class="logo">
-            <div class="logo-icon">I</div>
-            <div class="logo-text">Insights</div>
-            <div class="logo-subtext">Elite</div>
+            <div class="logo-graphic">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+                <div class="shape shape-6"></div>
+            </div>
+            <div class="logo-text">NOVEL</div>
+            <div class="logo-subtext">RESEARCH</div>
         </div>
         
         <h1 class="title">Complete</h1>
