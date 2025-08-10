@@ -1,14 +1,35 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const visitorRoutes = require('./routes/visitor');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '../public')));
+
 app.get('/', (req, res) => {
   res.send('Server running');
+});
+
+// Serve the HTML pages
+app.get('/complete', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/complete.html'));
+});
+
+app.get('/terminate', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/terminate.html'));
+});
+
+app.get('/quotafull', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/quotafull.html'));
+});
+
+app.get('/test-tracking', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/test-tracking.html'));
 });
 
 mongoose.connect('mongodb+srv://akshay:akshayAi@cluster0.x0klfly.mongodb.net/Novel?retryWrites=true&w=majority', {
