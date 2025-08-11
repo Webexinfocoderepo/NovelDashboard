@@ -19,7 +19,7 @@ ssh root@13.235.83.129
 # Navigate to the public folder
 cd /var/www/html/NovelDashboard/public
 
-# Check if the image exists
+# Check if the image exists 
 ls -la screenshot-2025.png
 
 # If it doesn't exist, upload it
