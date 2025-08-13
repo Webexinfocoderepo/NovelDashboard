@@ -55,5 +55,20 @@ export const apiService = {
       console.error('Error getting visitor stats:', error);
       throw error;
     }
+  },
+   async deleteVisitor(visitorId) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete/${visitorId}`, {
+        method: "DELETE",
+        redirect: "follow"
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete visitor');
+      }
+      return await response.text();
+    } catch (error) {
+      console.error('Error deleting visitor:', error);
+      throw error;
+    }
   }
 }; 

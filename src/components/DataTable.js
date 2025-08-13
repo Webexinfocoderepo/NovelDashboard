@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronUp, ChevronDown, RefreshCw } from 'lucide-react';
+import { ChevronUp, ChevronDown, RefreshCw, Trash2 } from 'lucide-react';
 import { apiService } from '../services/api';
 import './DataTable.css';
 
@@ -15,7 +15,8 @@ const DataTable = ({ showEntries, setShowEntries, filterData }) => {
     { key: 'userId', label: 'User ID', sortable: true },
     { key: 'status', label: 'Status', sortable: true },
     { key: 'ip', label: 'IP Address', sortable: true },
-    { key: 'createdAt', label: 'Date & Time', sortable: true }
+    { key: 'createdAt', label: 'Date & Time', sortable: true },
+    { key: 'actions', label: 'Actions', sortable: false }
   ];
 
   const fetchVisitors = async () => {
@@ -32,13 +33,24 @@ const DataTable = ({ showEntries, setShowEntries, filterData }) => {
     }
   };
 
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this visitor?")) {
+      try {
+        await apiService.deleteVisitor(id);
+        fetchVisitors(); // refresh table
+      } catch (err) {
+        console.error("Delete failed:", err);
+        alert("Failed to delete visitor");
+      }
+    }
+  };
+
   useEffect(() => {
     fetchVisitors();
   }, []);
 
   // Filter and paginate data
   const filteredData = visitors.filter(visitor => {
-    // General search
     if (filterData?.searchTerm) {
       const searchLower = filterData.searchTerm.toLowerCase();
       const projectId = visitor.projectId?.toString().toLowerCase() || '';
@@ -53,14 +65,12 @@ const DataTable = ({ showEntries, setShowEntries, filterData }) => {
       );
       if (!matchesSearch) return false;
     }
-    // Project ID filter
     if (filterData?.projectId) {
       const visitorProjectId = visitor.projectId?.toString().toLowerCase() || '';
       if (!visitorProjectId.includes(filterData.projectId.toLowerCase())) {
         return false;
       }
     }
-    // Status filter
     if (filterData?.status) {
       const visitorStatus = visitor.status?.toString().toLowerCase() || '';
       if (visitorStatus !== filterData.status.toLowerCase()) {
@@ -107,8 +117,6 @@ const DataTable = ({ showEntries, setShowEntries, filterData }) => {
           </div>
         </div>
 
-
-
         <div className="loading-state">
           <RefreshCw size={24} className="spinning" />
           <p>Loading visitor data...</p>
@@ -139,8 +147,6 @@ const DataTable = ({ showEntries, setShowEntries, filterData }) => {
           <RefreshCw size={16} onClick={handleRefresh} style={{ cursor: 'pointer' }} />
         </div>
       </div>
-
-
 
       {/* Table */}
       <div className="table-wrapper">
@@ -176,6 +182,15 @@ const DataTable = ({ showEntries, setShowEntries, filterData }) => {
                   </td>
                   <td>{visitor.ip}</td>
                   <td>{formatDate(visitor.createdAt)}</td>
+                  <td>
+                    <button 
+                      onClick={() => handleDelete(visitor._id)} 
+                      className="delete-btn"
+                      title="Delete"
+                    >
+                      <Trash2 size={16} color="red" />
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
@@ -215,4 +230,4 @@ const DataTable = ({ showEntries, setShowEntries, filterData }) => {
   );
 };
 
-export default DataTable; 
+export default DataTable;

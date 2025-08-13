@@ -42,13 +42,25 @@ router.get('/track', async (req, res) => {
 });
 router.get('/visitors', async (req, res) => {
     try {
-      const allVisitors = await Visitor.find().sort({ createdAt: -1 });
+      const allVisitors = await Visitor.find({isActive:true}).sort({ createdAt: -1 });
        if (!allVisitors || allVisitors.length === 0) {
       return res.json([]);
     }
 
     // res.json(allVisitors);
       res.json(allVisitors);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch visitors' });
+    }
+  });
+  router.delete('/delete/:id', async (req, res) => {
+    try {
+      const DeleteVisitors = await Visitor.findByIdAndUpdate({_id:req.params.id},{isActive:false});
+       if (!DeleteVisitors) {
+       res.status(500).json({ message: 'Failed to Delete visitors' });
+    }
+
+     res.status(200).json({ message: 'Visitor delete successfully' });
     } catch (err) {
       res.status(500).json({ error: 'Failed to fetch visitors' });
     }
