@@ -30,9 +30,9 @@ const Login = ({ onLogin }) => {
     try {
       setLoading(true);
 
-      // const response = await fetch('http://www.thenovelresearch.com/api/admin/login', {
+      const response = await fetch('http://www.thenovelresearch.com/api/admin/login', {
      
-      const response = await fetch('http://localhost:5050/admin/login', {
+      // const response = await fetch('http://localhost:5050/admin/login', {
 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
