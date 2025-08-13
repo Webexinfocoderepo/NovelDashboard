@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const visitorRoutes = require('./routes/visitor');
-
+const adminRoutes= require("./routes/admin")
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -40,6 +40,8 @@ mongoose.connect('mongodb+srv://akshay:akshayAi@cluster0.x0klfly.mongodb.net/Nov
 
 // ✅ Use routes
 app.use('/', visitorRoutes);
+app.use('/admin', adminRoutes);
+
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -9,6 +9,7 @@ const Login = ({ onLogin }) => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,23 +18,46 @@ const Login = ({ onLogin }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    // Simple validation
     if (!formData.username || !formData.password) {
       setError('Please fill in all fields');
       return;
     }
 
-    // Mock authentication - you can replace this with real API call
-    if (formData.username === 'admin' && formData.password === 'password') {
+    try {
+      setLoading(true);
+
+      // const response = await fetch('http://www.thenovelresearch.com/api/admin/login', {
+     
+      const response = await fetch('http://localhost:5050/admin/login', {
+
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userName: formData.username,
+          password: formData.password
+        })
+      });
+
+      const data = await response.json();
+   console.log("+++++++++++",data)
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Store token and user data
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('user', JSON.stringify({ username: formData.username }));
-      onLogin({ username: formData.username });
-    } else {
-      setError('Invalid username or password');
+      // localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.response.userName));
+
+      onLogin(data.response.userName);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -83,19 +107,13 @@ const Login = ({ onLogin }) => {
             </div>
           </div>
 
-          <button type="submit" className="login-btn">
-            Login
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-
-        <div className="login-footer">
-          <p>Demo Credentials:</p>
-          <p><strong>Username:</strong> admin</p>
-          <p><strong>Password:</strong> password</p>
-        </div>
       </div>
     </div>
   );
 };
 
-export default Login; 
+export default Login;
