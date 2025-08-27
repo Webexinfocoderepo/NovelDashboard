@@ -5,7 +5,7 @@ const path = require('path');
 const visitorRoutes = require('./routes/visitor');
 const adminRoutes= require("./routes/admin")
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // Serve static files from public directory
