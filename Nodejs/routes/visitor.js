@@ -25,16 +25,16 @@ router.get('/track', async (req, res) => {
     // Redirect based on action
     switch(action) {
         case 'Complete':
-            res.redirect('http://dashboard.thenovelresearch.com/api/complete');
+            res.redirect('https://dashboard.thenovelresearch.com/api/complete');
             break;
         case 'Terminate':
-            res.redirect('http://dashboard.thenovelresearch.com/api/terminate');
+            res.redirect('https://dashboard.thenovelresearch.com/api/terminate');
             break;
         case 'Quotafull':
-            res.redirect('http://dashboard.thenovelresearch.com/api/quotafull');
+            res.redirect('https://dashboard.thenovelresearch.com/api/quotafull');
             break;
         default:
-            res.redirect('http://dashboard.thenovelresearch.com/api/terminate'); // Default to terminate page
+            res.redirect('https://dashboard.thenovelresearch.com/api/terminate'); // Default to terminate page
     }
   } catch (err) {
     res.status(500).send("Something went wrong.");
